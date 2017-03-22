@@ -1,0 +1,17 @@
+1.创建一个用户dangdang
+
+2.使用dangdang登录oracle，注意，不能是sysdba模式
+
+3.创建表
+  tbCategory 图书类别表
+   id int not null 类别编号
+   name varchar2(50) not null 类别名称
+ tbBook 图书表
+   id int not null 图书编号
+   title varchar2(100) not null 书名
+   author  varchar2(100) 作者
+   publisherDate date 出版日期
+   unitprice number(8,2) 图书单价
+   categoryId int 图书类别
+   toc varchar2(1000) 章节描述
+4.这两张表，各自添加10条记录

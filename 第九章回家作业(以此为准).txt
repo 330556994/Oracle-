@@ -1,0 +1,40 @@
+1.
+  银行账户信息表
+ bankInfor
+   cardId卡号自增长,pwd 密码，username户名,phone手机号码,address地址,createtime开户日期，totalmoney余额（每次账户变动，都得更新这个余额）
+  cardid  pwd     username  phone    address createtime  totalmoney
+   1      123456   张三    138888888  上海     2016-1-1   1201
+
+  银行账户流水表（这里存放所有账户流水信息）
+  bankAccountInfor
+   id 流水序号自增长，cardid卡号 money金额  opt操作类型(存入，转出，转入，支取)  opttimte 操作日期
+  id  cardid  money   opt    opttime
+  1     1      1       存入   2016-1-1
+  2     1      1500    存入   2016-5-5
+  3     1      -300    支取   2016-5-9     
+==
+cardid是外键，关联bankinfor的cardid
+==
+  银行开户要求，至少账户里保存1元钱。
+写一个PLSQL块，用来开户
+  输入户名,密码，和手机号码地址。
+
+写一个PLSQL块，用来存/取钱。（注意，正数是存入，负数是取）
+输入卡号，和密码。
+ 存入金额。
+
+写一个PLSQL块，用来转账 
+输入卡号，密码，转出卡号，转出金额。 
+
+
+2. 再次完成昨天的作业，订单合并，注意使用事务。
+
+
+
+
+
+
+
+
+
+

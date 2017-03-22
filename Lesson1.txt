@@ -1,0 +1,211 @@
+1.数据库基础知识
+  数据库软件是用来存储数据的，提供用户查询添加删除修改的服务。
+2. 元组（实体） 这是用来描述一个具体的实体
+  如，学生，部门，员工
+
+ 员工实体(编号，姓名， 属性，列)：
+   这个表格，table
+   员工编号  姓名  地址 手机号码  性别  出生年月
+     1        张三  上海 1333     男     1991-1-1 行
+
+表格 table 
+一行代表一个实体 row，单元格
+键：用来唯一标示实体的属性（编号，手机号）
+主键（主属性）：最能表达实体的唯一不重复的那个键，一般是那个短的。
+
+====================
+oracle安装完毕之后，启动oracle，必须先启动两个服务。
+管理工具-服务-
+  ***Listener 侦听服务
+   OrcalServiceORCL(数据库 SID) 数据库服务
+一般把这两个服务改成，手动。以后如果需要连接ORACLE，则启动这两个服务。
+数据是一种逻辑概念，表，物理，肯定这些事保存在各种文件中。oracle为了管理这些文件，有一堆软件。做成了服务的形式。
+
+
+===
+  数据服务器：安装了数据库服务的计算机
+  数据库实例（服务实例）：数据服务器上已经启动了数据服务。
+================
+oracle8  oracle9i  10g  11g
+oracle版本 11g
+一台计算机上65535个端口，开端口是和外部进行通信。
+一般用户自己用的话，是10000以上。
+oracle服务器 
+   侦听服务 1521端口 。
+
+【客户端】client/server  C/S架构      【服务器】
+客户端发出连接ORACLE的请求1521
+服务器：侦听到这个请求，判断用户名和密码是否正确，如果正确，开辟一个Session(会话)，开辟一个内存空间。session是独立的，只能改用户访问。直到用户退出连接，session结束。
+ORACLE的数据服务，开辟了一个APPLICATION（全局应用内存），所有session都可以访问。
+================
+对ORACLE的操作：分成两种
+  1.程序员
+
+  2. DBA database adminstrator
+客户端工具：
+  oracle,sql plus
+  sql/developers
+=====
+登录模式：normal，sysdba
+oracle用户
+  SYS  DBA
+  SYSTEM  DBA 可以用普通模式登录
+  SCOTT[演示账号] 这是oracle之父，密码 tiger 
+===============
+
+====
+  报错：无效的侦听器
+一般去重配侦听器
+ net CA
+==============================
+数据库：
+  用户：
+  模式：数据库的对象都是存放在模式中的，一个用户一个模式，模式名就是用户名。数据库对象呢，就是表，视图等等。
+
+SYS模式，已SYSDBA身份登录的，进入的模式。管理员。
+
+普通模式：一般在普通模式里是创建数据对象的。
+
+如何创建用户？
+  一般为一个应用创建一个默认，BookShop
+-- Create the user 
+create user bookshop
+  identified by "888888"
+  default tablespace USERS;
+--
+需要为用户分配权限：
+一个角色中有多个权限，当一个角色分配一个用户时，该用户自动拥有该角色的权限。
+系统已经定义了一些角色，
+  两个，
+   connect  --具备连接
+   resource --能够创建数据对象
+
+grant connect to bookshop;
+grant resource to bookshop;
+ 再给一个系统特权：
+--grant unlimited tblespace to bookshop;
+
+
+
+
+
+
+理解ORACLE的逻辑概念
+ 数据库
+   有多个表空间（一个表空间有多个数据文件）
+     永久表空间：表，视图，数据对象
+     临时表空间，撤销表空间
+    一般DBA会创建一个模式，为这个模式分配不同的表空间，为这个表空间创建不同的数据文件，分散在不同磁盘上，这样做的好处是能够提高I/O的并发量。
+
+===============================
+数据库对象
+  表 table
+   字段的数据类型
+    char 字符，固定长度 char(50),50个字符长度，如果只设置10个字符，剩余是40个空格。
+   varchar2 可变长度 varchar2(50) 具体的长度是根据输入的值来确定的，但最多不超过50
+   nchar  unicode编码，如中文
+   nvarchar 
+   数字  nunmber(8,2) 总共8位，带2个小数点 整数部分是5位
+    int 整数 
+  date 日期 默认的日期
+   timestamp 时间戳 秒精确到小数点后6位
+  lob 大对象数据类型（CLOB BLOB BFILE）
+===============================
+==创建表的语法
+-- Create table
+create table tbEmp
+(
+  id       int not null,
+  name     nvarchar2(50) not null,
+  phone    char(11),
+  birthday date,
+  sex      int not null,
+  salary   number(8,2)
+)
+;
+-- Add comments to the columns 
+comment on column tbEmp.id
+  is '员工编号';
+comment on column tbEmp.name
+  is '姓名';
+comment on column tbEmp.phone
+  is '手机号码';
+comment on column tbEmp.birthday
+  is '出生年月';
+comment on column tbEmp.sex
+  is '性别0：男 1女';
+comment on column tbEmp.salary
+  is '工资';
+=============================
+ DML语句 查询，添加，删除，修改
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
